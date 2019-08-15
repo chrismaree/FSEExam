@@ -1,0 +1,23 @@
+{
+  "name": "fseexam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrismaree/FSEExam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrismaree/FSEExam/issues"
+  },
+  "homepage": "https://github.com/chrismaree/FSEExam#readme",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "node-fetch": "^2.6.0"
+  }
+}
