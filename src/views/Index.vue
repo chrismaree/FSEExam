@@ -217,7 +217,6 @@
       md-content="Your sneaker has been added!"
       md-confirm-text="Cool!"
     />
-
     <div class="main main-raised" style="margin-top:25px" id="technology">
       <div class="section">
         <div class="container">
@@ -234,39 +233,31 @@
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="info">
                   <div class="icon icon-info">
-                    <md-icon>chat</md-icon>
+                    <i class="fas fa-window-restore"></i>
                   </div>
-                  <h4 class="info-title">Free Chat</h4>
-                  <p>
-                    Divide details about your product or agency work into parts.
-                    Write a few lines about each one. A paragraph describing a
-                    feature will be enough.
-                  </p>
+                  <h4 class="info-title">Modern web Development</h4>
+                  <p>Built with VueJS, MaterialUI and Yarn to leverage powerful javascript frameworks, package managers and styled components.</p>
                 </div>
               </div>
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="info">
                   <div class="icon icon-success">
-                    <md-icon>verified_user</md-icon>
+                    <i class="fas fa-server"></i>
                   </div>
-                  <h4 class="info-title">Verified Users</h4>
+                  <h4 class="info-title">Serverless Infrastructure</h4>
                   <p>
-                    Divide details about your product or agency work into parts.
-                    Write a few lines about each one. A paragraph describing a
-                    feature will be enough.
+                    Backend CRUD API built using Node Serverless infrastructure to be light weight, simple and expandable. Stores information in JSON object.
                   </p>
                 </div>
               </div>
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
                 <div class="info">
                   <div class="icon icon-danger">
-                    <md-icon>fingerprint</md-icon>
+                    <i class="fas fa-recycle"></i>
                   </div>
-                  <h4 class="info-title">Fingerprint</h4>
+                  <h4 class="info-title">CI/CD Pipelines Included</h4>
                   <p>
-                    Divide details about your product or agency work into parts.
-                    Write a few lines about each one. A paragraph describing a
-                    feature will be enough.
+                    Deployed on <a href="https://zeit.co">zeit.co</a> for continuous integration and deployment pipelines for both the frontend and serverless infrastructure that deploy on every git push. 
                   </p>
                 </div>
               </div>
