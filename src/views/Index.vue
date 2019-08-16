@@ -142,7 +142,7 @@
               <h2 class="title text-center">Add New Sneakers</h2>
               <h5
                 class="description"
-              >Add a new sneaker to your catalog. Specify all the information you could possibly want about your beautiful sneaker!</h5>
+              >Add a new sneaker to your catalog. Specify all the information you could possibly want about your beautiful sneaker! The image you add should ideally be 350x350px.</h5>
             </div>
           </div>
         </div>
