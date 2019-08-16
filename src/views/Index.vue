@@ -20,12 +20,19 @@
       <div class="section">
         <div class="container">
           <div class="md-layout">
-            <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto text-center">
+            <div class="md-layout-item md-size-100 md-xsmall-size-100 mx-auto text-center">
               <h2 class="title text-center">Sneaker Catalog</h2>
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
-              <flip-card :shoeInfo="shoeInfo" />
+              <div class="md-layout">
+                <div
+                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                  v-for="sneaker in sneakers"
+                >
+                  <flip-card :shoeInfo="sneaker" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -108,6 +115,7 @@
 
 <script>
 import flipCard from "@/components/flipCard.vue";
+const axios = require("axios");
 
 export default {
   bodyClass: "landing-page",
@@ -123,12 +131,13 @@ export default {
       shoeInfo: {
         Brand: "Nike",
         img:
-          "https://rubinoshoes-9aed.kxcdn.com/35963-large_default/nike-cortez-basic-m-white-black-819719-100.jpg",
+          "https://www.thedropdate.com/wp-content/uploads/2018/03/Nike-Air-Max-97-Portugal-Patchwork-rp.jpg",
         Style: "Cortez",
         Color: "White",
         Date: "2019-01-30",
         Price: "1500"
-      }
+      },
+      sneakers: []
     };
   },
   computed: {
@@ -136,6 +145,17 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
+    }
+  },
+  async mounted() {
+    try {
+      let response = await axios.get(
+        "http://localhost:3000/api/sneaker/get-sneakers"
+      );
+      console.log(response);
+      this.sneakers = response.data;
+    } catch (err) {
+      console.log(err);
     }
   }
 };

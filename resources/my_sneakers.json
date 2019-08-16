@@ -1,121 +1,137 @@
-[
-    {
-       "Brand": "Nike",
-       "Style": "Cortez",
-       "Color": "White",
-       "Date": "2019-01-30",
-       "Price": "1500"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 97",
-       "Color": "Red",
-       "Date": "2018-04-02",
-       "Price": "1700"
-    },
-    {
-       "Brand": "Adidas",
-       "Style": "Ultra Boost",
-       "Color": "Black",
-       "Date": "2018-06-18",
-       "Price": "1800"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 90",
-       "Color": "Blue",
-       "Date": "2019-02-03",
-       "Price": "1500"
-    },
-    {
-       "Brand": "Adidas",
-       "Style": "Stan Smith",
-       "Color": "White",
-       "Date": "2018-02-15",
-       "Price": "1500"
-    },
-    {
-       "Brand": "Adidas",
-       "Style": "Ultra Boost",
-       "Color": "Silver",
-       "Date": "2018-05-01",
-       "Price": "1800"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 90",
-       "Color": "White / Red",
-       "Date": "2018-07-22",
-       "Price": "1700"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 90",
-       "Color": "Navy",
-       "Date": "2018-01-31",
-       "Price": "1500"
-    },
-    {
-       "Brand": "New Balance",
-       "Style": "997 Classic",
-       "Color": "Blue",
-       "Date": "2018-12-23",
-       "Price": "1100"
-    },
-    {
-       "Brand": "Puma",
-       "Style": "Suede Classic",
-       "Color": "Silver",
-       "Date": "2018-11-01",
-       "Price": "1300"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Vapormax",
-       "Color": "Black",
-       "Date": "2019-03-29",
-       "Price": "3000"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 95",
-       "Color": "Neon",
-       "Date": "2018-02-15",
-       "Price": "1500"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 97",
-       "Color": "Silver",
-       "Date": "2018-10-22",
-       "Price": "1800"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Max 90",
-       "Color": "White / Red",
-       "Date": "2018-07-22",
-       "Price": "1700"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Force 1",
-       "Color": "Navy",
-       "Date": "2019-02-14",
-       "Price": "1500"
-    },
-    {
-       "Brand": "Adidas",
-       "Style": "Gazelle",
-       "Color": "Blue",
-       "Date": "2018-01-01",
-       "Price": "1300"
-    },
-    {
-       "Brand": "Nike",
-       "Style": "Air Presto",
-       "Color": "Black",
-       "Date": "2018-04-28",
-       "Price": "1300"
-    }
+[{
+      "Brand": "Nike",
+      "img": "https://photos6.spartoo.eu/photos/326/3265570/3265570_350_A.jpg",
+      "Style": "Cortez",
+      "Color": "White",
+      "Date": "2019-01-30",
+      "Price": "1500"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://www.thedropdate.com/wp-content/uploads/2018/03/Nike-Air-Max-97-Portugal-Patchwork-rp.jpg",
+      "Style": "Air Max 97",
+      "Color": "Red",
+      "Date": "2018-04-02",
+      "Price": "1700"
+   },
+   {
+      "Brand": "Adidas",
+      "img": "https://cdn.bike24.net/i/p/0/2/329220_00_c.jpg?v97fa9227c5a7475145b4da98f694796dbdec3b2f",
+      "Style": "Ultra Boost",
+      "Color": "Black",
+      "Date": "2018-06-18",
+      "Price": "1800"
+   },
+   {
+      "Brand": "Nike",
+      "img": "http://www.purebrandsuk.com/images/nike-nike-air-max-90-essential-blue-slate-lt-base-grey-sail-t3b-mens-trainers-p1016-1972_medium.jpg",
+      "Style": "Air Max 90",
+      "Color": "Blue",
+      "Date": "2019-02-03",
+      "Price": "1500"
+   },
+   {
+      "Brand": "Adidas",
+      "img": "https://petersport.gr/PRImages/ProductPhotosXL/12669_Codes_KK1.jpg",
+      "Style": "Stan Smith",
+      "Color": "White",
+      "Date": "2018-02-15",
+      "Price": "1500"
+   },
+   {
+      "Brand": "Adidas",
+      "img": "https://www.shooos.com/media/catalog/product/cache/2/small_image/350x/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-ultra-boost-atr-mid-ash-silver-cm8254-8.jpg",
+      "Style": "Ultra Boost",
+      "Color": "Silver",
+      "Date": "2018-05-01",
+      "Price": "1800"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://www.thedropdate.com/wp-content/uploads/2018/05/Nike_Air_Max_90_1_uni_red_RP-1.jpg",
+      "Style": "Air Max 90",
+      "Color": "White / Red",
+      "Date": "2018-07-22",
+      "Price": "1700"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://res.cloudinary.com/s8/image/fetch/c_limit,d_ff:missing_image.png,f_auto,q_auto,w_350/https://runnerspoint.scene7.com/is/image/rpe/314213886204%3F%24rp_artikelbild_zoom%24",
+      "Style": "Air Max 90",
+      "Color": "Navy",
+      "Date": "2018-01-31",
+      "Price": "1500"
+   },
+   {
+      "Brand": "New Balance",
+      "img": "https://images.usc.co.uk/images/products/27591690_3pl.jpg",
+      "Style": "997 Classic",
+      "Color": "Blue",
+      "Date": "2018-12-23",
+      "Price": "1100"
+   },
+   {
+      "Brand": "Puma",
+      "img": "http://www.himalayaoutdoors.co.nz/images/category_11/Puma%20SUEDE%20CLASSIC%20Grey%20Shoes%20Low%20top%20trainers%20765684.jpg",
+      "Style": "Suede Classic",
+      "Color": "Silver",
+      "Date": "2018-11-01",
+      "Price": "1300"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://cdn.shopify.com/s/files/1/0042/0039/8966/products/nike-trainers-nike-air-vapormax-plus-black-black-uk-6-9244530046-675911766972-6937224839211_350x350.jpg?v=1563856312",
+      "Style": "Air Vapormax",
+      "Color": "Black",
+      "Date": "2019-03-29",
+      "Price": "3000"
+   },
+   {
+      "Brand": "Nike",
+      "img": "http://img10.360buyimg.com/n1/jfs/t970/158/1361403047/68347/5fd2908f/55d57eeaNf41a1466.jpg",
+      "Style": "Air Max 95",
+      "Color": "Neon",
+      "Date": "2018-02-15",
+      "Price": "1500"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://www.thedropdate.com/wp-content/uploads/2017/02/Nike-Air-Max-97-Silver-Bullet-rpa.jpg",
+      "Style": "Air Max 97",
+      "Color": "Silver",
+      "Date": "2018-10-22",
+      "Price": "1800"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://www.thedropdate.com/wp-content/uploads/2018/05/Nike_Air_Max_90_1_uni_red_RP-1.jpg",
+      "Style": "Air Max 90",
+      "Color": "White / Red",
+      "Date": "2018-07-22",
+      "Price": "1700"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://d2ob0iztsaxy5v.cloudfront.net/product/342130/3421305820_main.jpg",
+      "Style": "Air Force 1",
+      "Color": "Navy",
+      "Date": "2019-02-14",
+      "Price": "1500"
+   },
+   {
+      "Brand": "Adidas",
+      "img": "https://photos6.spartoo.co.uk/photos/365/3654081/3654081_350_A.jpg",
+      "Style": "Gazelle",
+      "Color": "Blue",
+      "Date": "2018-01-01",
+      "Price": "1300"
+   },
+   {
+      "Brand": "Nike",
+      "img": "https://larrydeadstock.com/5791-home_default/the-10-nike-air-presto-20-black-off-white.jpg",
+      "Style": "Air Presto",
+      "Color": "Black",
+      "Date": "2018-04-28",
+      "Price": "1300"
+   }
 ]

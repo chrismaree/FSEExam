@@ -3,7 +3,7 @@
     <div class="card" @click="flip($event)">
       <md-card class="front">
         <img :src="shoeInfo.img" style="width=350px" />
-        <h3>
+        <h3 style="margin-top:0px">
           <span style="font-weight:bold">{{shoeInfo.Brand}}</span>
           {{shoeInfo.Style}}
         </h3>
