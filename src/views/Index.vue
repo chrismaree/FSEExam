@@ -9,7 +9,12 @@
               style="font-weight:bold"
             >Take control of your sneaker collection and record and store all information about every pair you own. Keep track of when you bought your shoes, the branding, style and price so you never miss an important detail!</h4>
             <br />
-            <md-button href class="md-success md-lg" target="_blank">
+            <md-button
+              href
+              class="md-success md-lg"
+              target="_blank"
+              @click="scrollToElement('sneakerCatalog')"
+            >
               <i class="fas fa-arrow-down"></i> Begin
             </md-button>
           </div>
@@ -25,6 +30,15 @@
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
+
+              <div class="md-layout">
+                <div
+                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                  id="sliders"
+                >
+                  <vue-slider v-model="filterInfo.priceRange" :tooltip="'always'" :enable-cross="false"></vue-slider>
+                </div>
+              </div>
               <div class="md-layout">
                 <div
                   class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
@@ -128,17 +142,20 @@ export default {
   },
   data() {
     return {
-      shoeInfo: {
-        Brand: "Nike",
-        img:
-          "https://www.thedropdate.com/wp-content/uploads/2018/03/Nike-Air-Max-97-Portugal-Patchwork-rp.jpg",
-        Style: "Cortez",
-        Color: "White",
-        Date: "2019-01-30",
-        Price: "1500"
+      filterInfo: {
+        priceRange: [20, 60],
+        simple: 40
       },
       sneakers: []
     };
+  },
+  methods: {
+    scrollToElement(elementId) {
+      let element_id = document.getElementById(elementId);
+      if (element_id) {
+        element_id.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+    }
   },
   computed: {
     headerStyle() {
