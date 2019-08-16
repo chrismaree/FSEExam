@@ -145,9 +145,78 @@
               >Add a new sneaker to your catalog. Specify all the information you could possibly want about your beautiful sneaker! The image you add should ideally be 350x350px.</h5>
             </div>
           </div>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+              <h3>New Sneaker information</h3>
+              <md-field :class="messageBrand">
+                <md-icon>visibility</md-icon>
+                <label>Brand</label>
+                <span class="md-error">Brand is required</span>
+                <md-input v-model="newSneakerInfo.Brand" required></md-input>
+              </md-field>
+              <md-field :class="messageStyle">
+                <md-icon>style</md-icon>
+                <label>Style</label>
+                <md-input v-model="newSneakerInfo.Style" required></md-input>
+                <span class="md-error">Style is required</span>
+              </md-field>
+              <md-field :class="messageimg">
+                <md-icon>image_search</md-icon>
+                <label>Sneaker Image URL</label>
+                <md-input v-model="newSneakerInfo.img" required></md-input>
+                <span class="md-error">img is required</span>
+              </md-field>
+              <md-field>
+                <md-icon>color_lens</md-icon>
+                <label for="color">Colour</label>
+                <md-select v-model="newSneakerInfo.Color" name="color" id="color">
+                  <md-option style="margin:5px" value="Black">Black</md-option>
+                  <md-option style="margin:5px" value="White">White</md-option>
+                  <md-option style="margin:5px" value="Red">Red</md-option>
+                  <md-option style="margin:5px" value="Grey">Grey</md-option>
+                  <md-option style="margin:5px" value="Other">Other</md-option>
+                </md-select>
+              </md-field>
+              <md-datepicker v-model="newSneakerInfo.Date">
+                <label>Select date</label>
+              </md-datepicker>
+              <md-field :class="messagePrice">
+                <md-icon>attach_money</md-icon>
+                <label>Price</label>
+                <md-input
+                  min="0"
+                  max="10000"
+                  step="100"
+                  v-model="newSneakerInfo.Price"
+                  type="number"
+                  required
+                ></md-input>
+                <span class="md-error">Price is required</span>
+              </md-field>
+              <p
+                class="text-muted"
+              >Ppppssst. Click your sneaker card to view the details on the back</p>
+            </div>
+            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+              <flip-card :shoeInfo="newSneakerInfoProcessed" />
+            </div>
+          </div>
+          <div class="md-layout md-gutter" style="padding-top:50px">
+            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+              <md-button :disabled="validAddNewSneaker" @click="addSneaker">
+                <i class="fas fa-plus"></i> Add Sneaker
+              </md-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <md-dialog-alert
+      :md-active.sync="createdDialog"
+      md-content="Your sneaker has been added!"
+      md-confirm-text="Cool!"
+    />
 
     <div class="main main-raised" style="margin-top:25px" id="technology">
       <div class="section">
@@ -230,13 +299,21 @@ export default {
       ordered: false,
       allBrands: [],
       allColors: [],
+      createdDialog: false,
       filterInfo: {
         selectedColors: [],
         selectedBrands: [],
         priceRange: [1000, 4000],
         sortBy: "Brand"
       },
-      sneakers: []
+      sneakers: [],
+      newSneakerInfo: {
+        Brand: null,
+        Style: null,
+        Price: null,
+        Color: null,
+        Date: null
+      }
     };
   },
   methods: {
@@ -245,6 +322,41 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "start", behavior: "smooth" });
       }
+    },
+    async addSneaker() {
+      console.log("AADDD");
+      console.log(newSneakerObject);
+      let newSneakerObject = {
+        index: this.sneakers.length,
+        sneaker: this.newSneakerInfoProcessed
+      };
+      console.log(newSneakerObject);
+      await axios.post("/api/sneaker/add-sneaker", newSneakerObject);
+      this.sneakers.push(this.newSneakerInfoProcessed);
+      this.extractUniqueInfo();
+      this.createdDialog = true;
+    },
+    extractUniqueInfo() {
+      let allSneakerBrands = [];
+      let allSneakerColours = [];
+      this.sneakers.forEach(element => {
+        if (allSneakerBrands.indexOf(element.Brand) == -1) {
+          allSneakerBrands.push(element.Brand);
+        }
+        if (allSneakerColours.indexOf(element.Color) == -1) {
+          allSneakerColours.push(element.Color);
+        }
+      });
+
+      this.allBrands = JSON.parse(JSON.stringify(allSneakerBrands));
+      this.filterInfo.selectedBrands = JSON.parse(
+        JSON.stringify(allSneakerBrands)
+      );
+
+      this.allColors = JSON.parse(JSON.stringify(allSneakerColours));
+      this.filterInfo.selectedColors = JSON.parse(
+        JSON.stringify(allSneakerColours)
+      );
     }
   },
   computed: {
@@ -281,6 +393,63 @@ export default {
         scopedThis.render = true;
       }, 1);
       return sortedSneakers;
+    },
+    messageBrand() {
+      return {
+        "md-invalid": this.newSneakerInfo.Brand === ""
+      };
+    },
+    messageStyle() {
+      return {
+        "md-invalid": this.newSneakerInfo.Style === ""
+      };
+    },
+    messageimg() {
+      return {
+        "md-invalid": this.newSneakerInfo.img === ""
+      };
+    },
+    messagePrice() {
+      return {
+        "md-invalid": this.newSneakerInfo.Price === 0
+      };
+    },
+    newSneakerInfoProcessed() {
+      let processedInfo = JSON.parse(JSON.stringify(this.newSneakerInfo));
+      if (processedInfo.Date) {
+        processedInfo.Date = this.newSneakerInfo.Date.toISOString().substring(
+          0,
+          10
+        );
+      }
+      if (!processedInfo.Date) {
+        processedInfo.Date = "Some Date";
+      }
+      if (!processedInfo.Brand) {
+        processedInfo.Brand = "Brand";
+      }
+      if (!processedInfo.Style) {
+        processedInfo.Style = "Style";
+      }
+      if (!processedInfo.Price) {
+        processedInfo.Price = "$$$";
+      }
+      if (!processedInfo.Color) {
+        processedInfo.Color = "Color";
+      }
+      return processedInfo;
+    },
+    validAddNewSneaker() {
+      if (
+        this.newSneakerInfo.Date &&
+        this.newSneakerInfo.Brand &&
+        this.newSneakerInfo.Style &&
+        this.newSneakerInfo.Price &&
+        this.newSneakerInfo.Color
+      ) {
+        return false;
+      }
+      return true;
     }
   },
   async mounted() {
@@ -288,27 +457,7 @@ export default {
       let response = await axios.get("/api/sneaker/get-sneakers");
       console.log(response);
       this.sneakers = response.data;
-
-      let allSneakerBrands = [];
-      let allSneakerColours = [];
-      this.sneakers.forEach(element => {
-        if (allSneakerBrands.indexOf(element.Brand) == -1) {
-          allSneakerBrands.push(element.Brand);
-        }
-        if (allSneakerColours.indexOf(element.Color) == -1) {
-          allSneakerColours.push(element.Color);
-        }
-      });
-
-      this.allBrands = JSON.parse(JSON.stringify(allSneakerBrands));
-      this.filterInfo.selectedBrands = JSON.parse(
-        JSON.stringify(allSneakerBrands)
-      );
-
-      this.allColors = JSON.parse(JSON.stringify(allSneakerColours));
-      this.filterInfo.selectedColors = JSON.parse(
-        JSON.stringify(allSneakerColours)
-      );
+      this.extractUniqueInfo();
     } catch (err) {
       console.log(err);
     }

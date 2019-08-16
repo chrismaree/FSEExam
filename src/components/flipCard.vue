@@ -2,7 +2,8 @@
   <div class="container">
     <div class="card" @click="flip($event)">
       <md-card class="front">
-        <img :src="shoeInfo.img" style="width=350px" />
+        <img v-if="shoeInfo.img" :src="shoeInfo.img" style="width=350px" />
+        <img v-if="!shoeInfo.img" src="@/assets/shoeHolder.jpg" />
         <h3 style="margin-top:0px">
           <span style="font-weight:bold">{{shoeInfo.Brand}}</span>
           {{shoeInfo.Style}}
@@ -27,7 +28,7 @@
 </template>
 <script>
 export default {
-  props: { shoeInfo: { type: Object } },
+  props: { shoeInfo: { type: Object }, sideFlip: { type: Number, default: 0 } },
 
   data() {
     return {
