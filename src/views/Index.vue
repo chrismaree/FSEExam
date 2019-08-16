@@ -30,19 +30,56 @@
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
+              <md-button @click="filtered=!filtered">
+                <i class="fas fa-search"></i>Filter Sneakers
+              </md-button>
 
-              <div class="md-layout">
+              <div class="md-layout" v-if="filtered" style="padding-top:20px">
                 <div
                   class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
                   id="sliders"
                 >
-                  <vue-slider v-model="filterInfo.priceRange" :tooltip="'always'" :enable-cross="false"></vue-slider>
+                  <p style="font-weight:bold">Price range:</p>
+                  <vue-slider
+                    :min="0"
+                    :max="5000"
+                    :interval="50"
+                    v-model="filterInfo.priceRange"
+                    :tooltip="'always'"
+                    :tooltip-placement="'bottom'"
+                    :enable-cross="false"
+                  ></vue-slider>
+                </div>
+                <div
+                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                  id="sliders"
+                >
+                  <p style="font-weight:bold">Select Brand:</p>
+                  <md-checkbox
+                    v-for="brand in allBrands"
+                    v-model="filterInfo.selectedBrands"
+                    :value="brand"
+                    style="margin:5px"
+                  >{{brand}}</md-checkbox>
+                </div>
+                <div
+                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                  id="sliders"
+                >
+                  <p style="font-weight:bold">Select colour:</p>
+                  <md-checkbox
+                    v-for="color in allColors"
+                    v-model="filterInfo.selectedColors"
+                    :value="color"
+                    style="margin:5px"
+                  >{{color}}</md-checkbox>
                 </div>
               </div>
+
               <div class="md-layout">
                 <div
                   class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
-                  v-for="sneaker in sneakers"
+                  v-for="sneaker in filteredSneakers"
                 >
                   <flip-card :shoeInfo="sneaker" />
                 </div>
@@ -142,9 +179,15 @@ export default {
   },
   data() {
     return {
+      filtered: false,
+      allBrands: [],
+
+      allColors: [],
+
       filterInfo: {
-        priceRange: [20, 60],
-        simple: 40
+        selectedColors: [],
+        selectedBrands: [],
+        priceRange: [1000, 4000]
       },
       sneakers: []
     };
@@ -162,6 +205,20 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
+    },
+    filteredSneakers() {
+      let filteredSneakers = [];
+      this.sneakers.forEach(sneaker => {
+        if (
+          this.filterInfo.selectedBrands.indexOf(sneaker.Brand) != -1 &&
+          this.filterInfo.selectedColors.indexOf(sneaker.Color) != -1 &&
+          sneaker.Price > this.filterInfo.priceRange[0] &&
+          sneaker.Price < this.filterInfo.priceRange[1]
+        ) {
+          filteredSneakers.push(sneaker);
+        }
+      });
+      return filteredSneakers;
     }
   },
   async mounted() {
@@ -171,6 +228,27 @@ export default {
       );
       console.log(response);
       this.sneakers = response.data;
+
+      let allSneakerBrands = [];
+      let allSneakerColours = [];
+      this.sneakers.forEach(element => {
+        if (allSneakerBrands.indexOf(element.Brand) == -1) {
+          allSneakerBrands.push(element.Brand);
+        }
+        if (allSneakerColours.indexOf(element.Color) == -1) {
+          allSneakerColours.push(element.Color);
+        }
+      });
+
+      this.allBrands = JSON.parse(JSON.stringify(allSneakerBrands));
+      this.filterInfo.selectedBrands = JSON.parse(
+        JSON.stringify(allSneakerBrands)
+      );
+
+      this.allColors = JSON.parse(JSON.stringify(allSneakerColours));
+      this.filterInfo.selectedColors = JSON.parse(
+        JSON.stringify(allSneakerColours)
+      );
     } catch (err) {
       console.log(err);
     }
