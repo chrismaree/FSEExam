@@ -30,59 +30,95 @@
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
-              <md-button @click="filtered=!filtered">
+              <md-button class="md-info" @click="filtered=!filtered; ordered = false">
                 <i class="fas fa-search"></i>Filter Sneakers
               </md-button>
-
-              <div class="md-layout" v-if="filtered" style="padding-top:20px">
+              <md-button
+                class="md-info"
+                @click="ordered=!ordered; filtered = false"
+                style="margin-left:20px"
+              >
+                <i class="fas fa-list"></i>Order Sneakers
+              </md-button>
+              <transition-group name="fadeDown">
                 <div
-                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
-                  id="sliders"
+                  class="md-layout"
+                  v-if="filtered"
+                  style="padding-top:20px"
+                  v-bind:key="'filter'"
                 >
-                  <p style="font-weight:bold">Price range:</p>
-                  <vue-slider
-                    :min="0"
-                    :max="5000"
-                    :interval="50"
-                    v-model="filterInfo.priceRange"
-                    :tooltip="'always'"
-                    :tooltip-placement="'bottom'"
-                    :enable-cross="false"
-                  ></vue-slider>
+                  <div
+                    class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                    id="sliders"
+                  >
+                    <p style="font-weight:bold">Price range:</p>
+                    <vue-slider
+                      :min="0"
+                      :max="5000"
+                      :interval="50"
+                      v-model="filterInfo.priceRange"
+                      :tooltip="'always'"
+                      :tooltip-placement="'bottom'"
+                      :enable-cross="false"
+                    ></vue-slider>
+                  </div>
+                  <div
+                    class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                    id="sliders"
+                  >
+                    <p style="font-weight:bold">Select Brand:</p>
+                    <md-checkbox
+                      v-for="brand in allBrands"
+                      v-model="filterInfo.selectedBrands"
+                      :value="brand"
+                      style="margin:5px"
+                    >{{brand}}</md-checkbox>
+                  </div>
+                  <div
+                    class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                    id="sliders"
+                  >
+                    <p style="font-weight:bold">Select colour:</p>
+                    <md-checkbox
+                      v-for="color in allColors"
+                      v-model="filterInfo.selectedColors"
+                      :value="color"
+                      style="margin:5px"
+                    >{{color}}</md-checkbox>
+                  </div>
                 </div>
+              </transition-group>
+              <transition-group name="fadeDown">
                 <div
-                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
-                  id="sliders"
+                  class="md-layout"
+                  v-if="ordered"
+                  style="padding-top:20px"
+                  v-bind:key="'orderSneakers'"
                 >
-                  <p style="font-weight:bold">Select Brand:</p>
-                  <md-checkbox
-                    v-for="brand in allBrands"
-                    v-model="filterInfo.selectedBrands"
-                    :value="brand"
-                    style="margin:5px"
-                  >{{brand}}</md-checkbox>
+                  <div
+                    class="md-layout-item md-size-100 md-xsmall-size-100 mx-auto text-center"
+                    id="sliders"
+                  >
+                    <p style="font-weight:bold">Sort Sneakers By:</p>
+                    <md-radio style="margin:5px" v-model="filterInfo.sortBy" value="Brand">Brand</md-radio>
+                    <md-radio style="margin:5px" v-model="filterInfo.sortBy" value="Style">Style</md-radio>
+                    <md-radio style="margin:5px" v-model="filterInfo.sortBy" value="Color">Color</md-radio>
+                    <md-radio style="margin:5px" v-model="filterInfo.sortBy" value="Date">Date</md-radio>
+                    <md-radio style="margin:5px" v-model="filterInfo.sortBy" value="Price">Price</md-radio>
+                  </div>
                 </div>
-                <div
-                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
-                  id="sliders"
-                >
-                  <p style="font-weight:bold">Select colour:</p>
-                  <md-checkbox
-                    v-for="color in allColors"
-                    v-model="filterInfo.selectedColors"
-                    :value="color"
-                    style="margin:5px"
-                  >{{color}}</md-checkbox>
-                </div>
-              </div>
-
+              </transition-group>
               <div class="md-layout">
-                <div
-                  class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
-                  v-for="sneaker in filteredSneakers"
-                >
-                  <flip-card :shoeInfo="sneaker" />
-                </div>
+                <transition-group name="zoom" class="md-layout">
+                  <div
+                    class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                    v-for="sneaker in sortedSneakers"
+                    v-bind:key="sneaker.Date+sneaker.Style+sneaker.Brand"
+                    v-if="render"
+                  >
+                    <flip-card :shoeInfo="sneaker" />
+                  </div>
+                </transition-group>
               </div>
             </div>
           </div>
@@ -165,6 +201,7 @@
 </template>
 
 <script>
+require("vue2-animate/dist/vue2-animate.min.css");
 import flipCard from "@/components/flipCard.vue";
 const axios = require("axios");
 
@@ -179,15 +216,16 @@ export default {
   },
   data() {
     return {
+      render: true,
       filtered: false,
+      ordered: false,
       allBrands: [],
-
       allColors: [],
-
       filterInfo: {
         selectedColors: [],
         selectedBrands: [],
-        priceRange: [1000, 4000]
+        priceRange: [1000, 4000],
+        sortBy: "Brand"
       },
       sneakers: []
     };
@@ -219,6 +257,21 @@ export default {
         }
       });
       return filteredSneakers;
+    },
+    sortedSneakers() {
+      let scopedThis = this;
+      this.render = false;
+      let sortedSneakers = this.filteredSneakers.sort((a, b) =>
+        a[this.filterInfo.sortBy] > b[this.filterInfo.sortBy]
+          ? 1
+          : b[this.filterInfo.sortBy] > a[this.filterInfo.sortBy]
+          ? -1
+          : 0
+      );
+      setTimeout(function() {
+        scopedThis.render = true;
+      }, 1);
+      return sortedSneakers;
     }
   },
   async mounted() {
