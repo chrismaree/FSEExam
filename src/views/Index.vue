@@ -245,9 +245,7 @@
                     <i class="fas fa-server"></i>
                   </div>
                   <h4 class="info-title">Serverless Infrastructure</h4>
-                  <p>
-                    Backend CRUD API built using Node Serverless infrastructure to be light weight, simple and expandable. Stores information in JSON object.
-                  </p>
+                  <p>Backend CRUD API built using Node Serverless infrastructure to be light weight, simple and expandable. Stores information in JSON object.</p>
                 </div>
               </div>
               <div class="md-layout-item md-medium-size-33 md-small-size-100">
@@ -257,7 +255,8 @@
                   </div>
                   <h4 class="info-title">CI/CD Pipelines Included</h4>
                   <p>
-                    Deployed on <a href="https://zeit.co">zeit.co</a> for continuous integration and deployment pipelines for both the frontend and serverless infrastructure that deploy on every git push. 
+                    Deployed on
+                    <a href="https://zeit.co">zeit.co</a> for continuous integration and deployment pipelines for both the frontend and serverless infrastructure that deploy on every git push.
                   </p>
                 </div>
               </div>
@@ -448,7 +447,9 @@ export default {
       let response = await axios.get("/api/sneaker/get-sneakers");
       console.log(response);
       this.sneakers = response.data;
-      this.extractUniqueInfo();
+      if (response) {
+        this.extractUniqueInfo();
+      }
     } catch (err) {
       console.log(err);
     }
