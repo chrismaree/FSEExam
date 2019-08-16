@@ -55,7 +55,7 @@
                     <vue-slider
                       :min="0"
                       :max="5000"
-                      :interval="50"
+                      :interval="200"
                       v-model="filterInfo.priceRange"
                       :tooltip="'always'"
                       :tooltip-placement="'bottom'"
@@ -120,6 +120,15 @@
                   </div>
                 </transition-group>
               </div>
+              <transition-group name="zoom" class="md-layout">
+                <md-empty-state
+                  v-if="sortedSneakers.length==0"
+                  v-bind:key="'emptyState'"
+                  md-icon="search"
+                  md-label="No Sneakers selected"
+                  md-description="Your Filter criteria does not match any sneakers. Please change."
+                ></md-empty-state>
+              </transition-group>
             </div>
           </div>
         </div>
@@ -276,9 +285,7 @@ export default {
   },
   async mounted() {
     try {
-      let response = await axios.get(
-        "http://localhost:3000/api/sneaker/get-sneakers"
-      );
+      let response = await axios.get("/api/sneaker/get-sneakers");
       console.log(response);
       this.sneakers = response.data;
 
