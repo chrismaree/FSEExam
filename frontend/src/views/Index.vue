@@ -25,6 +25,7 @@
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
+              <flip-card :shoeInfo="shoeInfo" />
             </div>
           </div>
         </div>
@@ -106,31 +107,28 @@
 </template>
 
 <script>
+import flipCard from "@/components/flipCard.vue";
+
 export default {
   bodyClass: "landing-page",
+  components: { flipCard },
   props: {
     header: {
       type: String,
       default: require("@/assets/shoe.jpg")
-    },
-    teamImg1: {
-      type: String,
-      default: require("@/assets/img/faces/avatar.jpg")
-    },
-    teamImg2: {
-      type: String,
-      default: require("@/assets/img/faces/christian.jpg")
-    },
-    teamImg3: {
-      type: String,
-      default: require("@/assets/img/faces/kendall.jpg")
     }
   },
   data() {
     return {
-      name: null,
-      email: null,
-      message: null
+      shoeInfo: {
+        Brand: "Nike",
+        img:
+          "https://rubinoshoes-9aed.kxcdn.com/35963-large_default/nike-cortez-basic-m-white-black-819719-100.jpg",
+        Style: "Cortez",
+        Color: "White",
+        Date: "2019-01-30",
+        Price: "1500"
+      }
     };
   },
   computed: {
