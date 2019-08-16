@@ -5,7 +5,9 @@
         <div class="md-layout">
           <div class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100">
             <h1 class="title">Sneaky Sneaker Registry</h1>
-            <h4 style="font-weight:bold">Take control of your sneaker collection and record and store all information about every pair you own. Keep track of when you bought your shoes, the branding, style and price so you never miss an important detail!</h4>
+            <h4
+              style="font-weight:bold"
+            >Take control of your sneaker collection and record and store all information about every pair you own. Keep track of when you bought your shoes, the branding, style and price so you never miss an important detail!</h4>
             <br />
             <md-button href class="md-success md-lg" target="_blank">
               <i class="fas fa-arrow-down"></i> Begin
@@ -14,7 +16,7 @@
         </div>
       </div>
     </parallax>
-    <div class="main main-raised">
+    <div class="main main-raised" id="sneakerCatalog">
       <div class="section">
         <div class="container">
           <div class="md-layout">
@@ -28,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="main main-raised" style="margin-top:25px">
+    <div class="main main-raised" style="margin-top:25px" id="addNewSneakers">
       <div class="section">
         <div class="container">
           <div class="md-layout">
@@ -43,12 +45,12 @@
       </div>
     </div>
 
-    <div class="main main-raised" style="margin-top:25px">
+    <div class="main main-raised" style="margin-top:25px" id="technology">
       <div class="section">
         <div class="container">
           <div class="md-layout">
             <div class="md-layout-item md-size-66 md-xsmall-size-100 mx-auto text-center">
-              <h2 class="title text-center">Sneaky Sneaker Registry Technology </h2>
+              <h2 class="title text-center">Sneaky Sneaker Registry Technology</h2>
               <h5
                 class="description"
               >Built on the latest and greatest web development frameworks and tools.</h5>
