@@ -189,7 +189,7 @@
                   <md-icon>image_search</md-icon>
                   <label>Sneaker Image URL</label>
                   <md-input v-model="newSneakerInfo.img" required></md-input>
-                  <span class="md-error">img is required</span>
+                  <span class="md-error">Image URL is required and should be a valid link to an image</span>
                 </md-field>
                 <md-field>
                   <md-icon>color_lens</md-icon>
@@ -337,7 +337,8 @@ export default {
         Style: null,
         Price: null,
         Color: null,
-        Date: null
+        Date: null,
+        img: null
       }
     };
   },
@@ -382,6 +383,15 @@ export default {
       this.filterInfo.selectedColors = JSON.parse(
         JSON.stringify(allSneakerColours)
       );
+    },
+    checkURL(url) {
+      if (url != null) {
+        return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+      }
+      if (url === "") {
+        return true;
+      }
+      return false;
     }
   },
   computed: {
@@ -446,9 +456,15 @@ export default {
       };
     },
     messageimg() {
-      return {
-        "md-invalid": this.newSneakerInfo.img === ""
-      };
+      if (this.newSneakerInfo.img === null) {
+        return { "md-invalid": false };
+      } else {
+        return {
+          "md-invalid":
+            this.newSneakerInfo.img === "" ||
+            !this.checkURL(this.newSneakerInfo.img)
+        };
+      }
     },
     messagePrice() {
       return {
@@ -486,7 +502,8 @@ export default {
         this.newSneakerInfo.Brand &&
         this.newSneakerInfo.Style &&
         this.newSneakerInfo.Price &&
-        this.newSneakerInfo.Color
+        this.newSneakerInfo.Color &&
+        this.newSneakerInfo.img
       ) {
         return false;
       }
