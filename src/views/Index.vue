@@ -143,71 +143,84 @@
               <h5
                 class="description"
               >Add a new sneaker to your catalog. Specify all the information you could possibly want about your beautiful sneaker! The image you add should ideally be 350x350px.</h5>
-            </div>
-          </div>
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
-              <h3>New Sneaker information</h3>
-              <md-field :class="messageBrand">
-                <md-icon>visibility</md-icon>
-                <label>Brand</label>
-                <span class="md-error">Brand is required</span>
-                <md-input v-model="newSneakerInfo.Brand" required></md-input>
-              </md-field>
-              <md-field :class="messageStyle">
-                <md-icon>style</md-icon>
-                <label>Style</label>
-                <md-input v-model="newSneakerInfo.Style" required></md-input>
-                <span class="md-error">Style is required</span>
-              </md-field>
-              <md-field :class="messageimg">
-                <md-icon>image_search</md-icon>
-                <label>Sneaker Image URL</label>
-                <md-input v-model="newSneakerInfo.img" required></md-input>
-                <span class="md-error">img is required</span>
-              </md-field>
-              <md-field>
-                <md-icon>color_lens</md-icon>
-                <label for="color">Colour</label>
-                <md-select v-model="newSneakerInfo.Color" name="color" id="color">
-                  <md-option style="margin:5px" value="Black">Black</md-option>
-                  <md-option style="margin:5px" value="White">White</md-option>
-                  <md-option style="margin:5px" value="Red">Red</md-option>
-                  <md-option style="margin:5px" value="Grey">Grey</md-option>
-                  <md-option style="margin:5px" value="Other">Other</md-option>
-                </md-select>
-              </md-field>
-              <md-datepicker v-model="newSneakerInfo.Date">
-                <label>Select date</label>
-              </md-datepicker>
-              <md-field :class="messagePrice">
-                <md-icon>attach_money</md-icon>
-                <label>Price</label>
-                <md-input
-                  min="0"
-                  max="10000"
-                  step="100"
-                  v-model="newSneakerInfo.Price"
-                  type="number"
-                  required
-                ></md-input>
-                <span class="md-error">Price is required</span>
-              </md-field>
-              <p
-                class="text-muted"
-              >Ppppssst. Click your sneaker card to view the details on the back</p>
-            </div>
-            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
-              <flip-card :shoeInfo="newSneakerInfoProcessed" />
-            </div>
-          </div>
-          <div class="md-layout md-gutter" style="padding-top:50px">
-            <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
-              <md-button :disabled="validAddNewSneaker" @click="addSneaker">
-                <i class="fas fa-plus"></i> Add Sneaker
+              <md-button class="md-primary" v-if="!addNewSneaker" @click="addNewSneaker=!addNewSneaker">
+                <i class="fas fa-rocket"></i> Add Sneaker
               </md-button>
             </div>
           </div>
+
+          <transition-group name="flipX">
+            <div class="md-layout md-gutter" v-bind:key="'AddNewSneaker'" v-if="addNewSneaker">
+              <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+                <h3>New Sneaker information</h3>
+                <md-field :class="messageBrand">
+                  <md-icon>visibility</md-icon>
+                  <label>Brand</label>
+                  <span class="md-error">Brand is required</span>
+                  <md-input v-model="newSneakerInfo.Brand" required></md-input>
+                </md-field>
+                <md-field :class="messageStyle">
+                  <md-icon>style</md-icon>
+                  <label>Style</label>
+                  <md-input v-model="newSneakerInfo.Style" required></md-input>
+                  <span class="md-error">Style is required</span>
+                </md-field>
+                <md-field :class="messageimg">
+                  <md-icon>image_search</md-icon>
+                  <label>Sneaker Image URL</label>
+                  <md-input v-model="newSneakerInfo.img" required></md-input>
+                  <span class="md-error">img is required</span>
+                </md-field>
+                <md-field>
+                  <md-icon>color_lens</md-icon>
+                  <label for="color">Colour</label>
+                  <md-select v-model="newSneakerInfo.Color" name="color" id="color">
+                    <md-option style="margin:5px" value="Black">Black</md-option>
+                    <md-option style="margin:5px" value="White">White</md-option>
+                    <md-option style="margin:5px" value="Red">Red</md-option>
+                    <md-option style="margin:5px" value="Grey">Grey</md-option>
+                    <md-option style="margin:5px" value="Other">Other</md-option>
+                  </md-select>
+                </md-field>
+                <md-datepicker v-model="newSneakerInfo.Date">
+                  <label>Select date</label>
+                </md-datepicker>
+                <md-field :class="messagePrice">
+                  <md-icon>attach_money</md-icon>
+                  <label>Price</label>
+                  <md-input
+                    min="0"
+                    max="10000"
+                    step="100"
+                    v-model="newSneakerInfo.Price"
+                    type="number"
+                    required
+                  ></md-input>
+                  <span class="md-error">Price is required</span>
+                </md-field>
+                <p
+                  class="text-muted"
+                >Ppppssst. Click your sneaker card to view the details on the back</p>
+              </div>
+              <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+                <flip-card :shoeInfo="newSneakerInfoProcessed" />
+              </div>
+            </div>
+          </transition-group>
+          <transition-group name="bounceUp">
+            <div
+              class="md-layout md-gutter"
+              style="padding-top:50px"
+              v-if="addNewSneaker"
+              v-bind:key="'button'"
+            >
+              <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+                <md-button class="md-primary" :disabled="validAddNewSneaker" @click="addSneaker">
+                  <i class="fas fa-plus"></i> Add Sneaker
+                </md-button>
+              </div>
+            </div>
+          </transition-group>
         </div>
       </div>
     </div>
@@ -287,6 +300,7 @@ export default {
       render: true,
       filtered: false,
       ordered: false,
+      addNewSneaker: false,
       allBrands: [],
       allColors: [],
       createdDialog: false,
