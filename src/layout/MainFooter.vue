@@ -8,7 +8,7 @@
       <nav></nav>
       <div class="copyright">
         &copy; {{ year }}, made with
-        <md-icon>favorite</md-icon>by
+        <md-icon>favorite</md-icon> by
         <a href="https://www.chrismaree.io" target="_blank">Chris Maree</a>
       </div>
     </div>
