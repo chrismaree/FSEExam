@@ -38,11 +38,7 @@
                   </md-button>
                 </div>
                 <div class="md-layout-item">
-                  <md-button
-                    class="md-info"
-                    @click="ordered=!ordered; filtered = false"
-                    style="margin-left:20px"
-                  >
+                  <md-button class="md-info" @click="ordered=!ordered; filtered = false">
                     <i class="fas fa-list"></i>Order Sneakers
                   </md-button>
                 </div>
@@ -189,7 +185,9 @@
                   <md-icon>image_search</md-icon>
                   <label>Sneaker Image URL</label>
                   <md-input v-model="newSneakerInfo.img" required></md-input>
-                  <span class="md-error">Image URL is required and should be a valid link to an image</span>
+                  <span
+                    class="md-error"
+                  >Image URL is required and should be a valid link to an image</span>
                 </md-field>
                 <md-field>
                   <md-icon>color_lens</md-icon>
