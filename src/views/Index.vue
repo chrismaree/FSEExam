@@ -30,16 +30,32 @@
               <h5
                 class="description"
               >View a history of all your sneakers that you have purchased in the past.</h5>
-              <md-button class="md-info" @click="filtered=!filtered; ordered = false">
-                <i class="fas fa-search"></i>Filter Sneakers
-              </md-button>
-              <md-button
-                class="md-info"
-                @click="ordered=!ordered; filtered = false"
-                style="margin-left:20px"
-              >
-                <i class="fas fa-list"></i>Order Sneakers
-              </md-button>
+              <div class="md-layout">
+                <div class="md-layout-item md-small-hide"></div>
+                <div class="md-layout-item">
+                  <md-button class="md-info" @click="filtered=!filtered; ordered = false">
+                    <i class="fas fa-search"></i>Filter Sneakers
+                  </md-button>
+                </div>
+                <div class="md-layout-item">
+                  <md-button
+                    class="md-info"
+                    @click="ordered=!ordered; filtered = false"
+                    style="margin-left:20px"
+                  >
+                    <i class="fas fa-list"></i>Order Sneakers
+                  </md-button>
+                </div>
+                <div class="md-layout-item">
+                  <md-field>
+                    <md-icon>search</md-icon>
+                    <label>Search</label>
+                    <md-input v-model="filterInfo.searchString"></md-input>
+                  </md-field>
+                </div>
+                <div class="md-layout-item md-small-hide"></div>
+              </div>
+
               <transition-group name="fadeDown">
                 <div
                   class="md-layout"
@@ -111,7 +127,7 @@
               <div class="md-layout">
                 <transition-group name="zoom" class="md-layout">
                   <div
-                    class="md-layout-item md-size-33 md-xsmall-size-100 mx-auto text-center"
+                    class="md-layout-item md-size-33 md-medium-size-50 md-small-size-100 mx-auto text-center"
                     v-for="sneaker in sortedSneakers"
                     v-bind:key="sneaker.Date+sneaker.Style+sneaker.Brand"
                     v-if="render"
@@ -143,7 +159,11 @@
               <h5
                 class="description"
               >Add a new sneaker to your catalog. Specify all the information you could possibly want about your beautiful sneaker! The image you add should ideally be 350x350px.</h5>
-              <md-button class="md-primary" v-if="!addNewSneaker" @click="addNewSneaker=!addNewSneaker">
+              <md-button
+                class="md-primary"
+                v-if="!addNewSneaker"
+                @click="addNewSneaker=!addNewSneaker"
+              >
                 <i class="fas fa-rocket"></i> Add Sneaker
               </md-button>
             </div>
@@ -151,7 +171,7 @@
 
           <transition-group name="flipX">
             <div class="md-layout md-gutter" v-bind:key="'AddNewSneaker'" v-if="addNewSneaker">
-              <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+              <div class="md-layout-item md-size-40 md-small-size-100 mx-auto text-center">
                 <h3>New Sneaker information</h3>
                 <md-field :class="messageBrand">
                   <md-icon>visibility</md-icon>
@@ -202,7 +222,7 @@
                   class="text-muted"
                 >Ppppssst. Click your sneaker card to view the details on the back</p>
               </div>
-              <div class="md-layout-item md-size-40 md-xsmall-size-100 mx-auto text-center">
+              <div class="md-layout-item md-size-40 md-small-size-100 mx-auto text-center">
                 <flip-card :shoeInfo="newSneakerInfoProcessed" />
               </div>
             </div>
@@ -308,7 +328,8 @@ export default {
         selectedColors: [],
         selectedBrands: [],
         priceRange: [1000, 4000],
-        sortBy: "Brand"
+        sortBy: "Brand",
+        searchString: ""
       },
       sneakers: [],
       newSneakerInfo: {
@@ -381,6 +402,22 @@ export default {
           filteredSneakers.push(sneaker);
         }
       });
+      if (this.filterInfo.searchString != "") {
+        filteredSneakers = filteredSneakers.filter(sneaker => {
+          let includeSneaker = false;
+          Object.keys(sneaker).forEach(sneakerKey => {
+            if (
+              sneaker[sneakerKey]
+                .toLocaleLowerCase()
+                .includes(this.filterInfo.searchString.toLocaleLowerCase()) &&
+              sneakerKey != "img"
+            ) {
+              includeSneaker = true;
+            }
+          });
+          return includeSneaker;
+        });
+      }
       return filteredSneakers;
     },
     sortedSneakers() {
