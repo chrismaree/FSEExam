@@ -1,3 +1,4 @@
+//This simple serverless API lets you get the number of sneakers added to the database
 const fetch = require("node-fetch");
 require('dotenv').config()
 

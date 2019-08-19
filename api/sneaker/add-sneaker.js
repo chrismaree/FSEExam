@@ -1,3 +1,5 @@
+//This simple serverless API lets you add new sneakers to the json database
+
 const fetch = require("node-fetch");
 require('dotenv').config()
 

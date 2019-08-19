@@ -1,3 +1,4 @@
+//This simple serverless API lets you get sneakers from the serverless interface.
 const fetch = require("node-fetch");
 require('dotenv').config()
 
